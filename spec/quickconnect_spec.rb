@@ -8,6 +8,8 @@ describe "QuickConnect" do
       yaml.stub!(:fetch).and_return({:database => "configured"})
       YAML.stub!(:load).and_return yaml
     end
+    it "should provide a nice error message if the database config can't be found"
+    it "should provide a nice error message if the environment is not known"
     it "should read options from the config provided" do
       File.should_receive(:read).with("path").and_return true
       QuickConnect.get_database_config("path", "environment")
