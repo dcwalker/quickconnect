@@ -1,0 +1,8 @@
+#!/usr/bin/env ruby
+
+require File.expand_path(File.join(File.dirname(__FILE__), %w[.. lib quickconnect]))
+
+RAILS_ENV = ENV['RAILS_ENV'] ? ENV['RAILS_ENV'] : "development"
+
+database_config = QuickConnect.get_database_config('config/database.yml', RAILS_ENV)
+system(QuickConnect.get_mysql_prompt(database_config)) if database_config["adapter"] == "mysql"
