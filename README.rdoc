@@ -1,9 +1,15 @@
 = quickconnect
 
-Description goes here.
+Quickly connect to a Rails database by inspecting the database.yml of the current application directory.
+
+== Use
+
+* Set your RAILS_ENV to the environment you want to connect to.
+** Default is `development` if RAILS_ENV isn't defined.
+* In your application directory type `quickconnect`
 
 == Note on Patches/Pull Requests
- 
+
 * Fork the project.
 * Make your feature addition or bug fix.
 * Add tests for it. This is important so I don't break it in a
