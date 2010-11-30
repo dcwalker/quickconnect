@@ -8,10 +8,17 @@ module QuickConnect
 
   def self.get_mysql_prompt(database_config)
     prompt = ["mysql"]
+    prompt.push self.get_mysql_connect_options(database_config)
+    return prompt.join(" ")
+  end
+
+  def self.get_mysql_connect_options(database_config)
+    prompt = []
     prompt.push "--host=#{database_config["host"]}" if database_config["host"]
     prompt.push "--user=#{database_config["user"]}" if database_config["user"]
     prompt.push "--password=#{database_config["password"]}" if database_config["password"]
     prompt.push database_config["database"] if database_config["database"]
     return prompt.join(" ")
   end
+
 end

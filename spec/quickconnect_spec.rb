@@ -24,17 +24,25 @@ describe "QuickConnect" do
     it "should begin with 'mysql'" do
       QuickConnect.get_mysql_prompt("configuration").should match(/^mysql/)
     end
+
+    it "should include the prompt options from the provided configuration" do
+      QuickConnect.should_receive(:get_mysql_connect_options).with("configuration").and_return("options")
+      QuickConnect.get_mysql_prompt("configuration").should match(/^mysql options/)
+    end
+  end
+
+  context ".get_mysql_connect_options" do
     it "should include a host option if provided" do
-      QuickConnect.get_mysql_prompt({"host" => "dbhost"}).should match(/--host=dbhost/)
+      QuickConnect.get_mysql_connect_options({"host" => "dbhost"}).should match(/--host=dbhost/)
     end
     it "should include a user option if provided" do
-      QuickConnect.get_mysql_prompt({"user" => "dbuser"}).should match(/--user=dbuser/)
+      QuickConnect.get_mysql_connect_options({"user" => "dbuser"}).should match(/--user=dbuser/)
     end
     it "should include a password option if provided" do
-      QuickConnect.get_mysql_prompt({"password" => "dbpassword"}).should match(/--password=dbpassword/)
+      QuickConnect.get_mysql_connect_options({"password" => "dbpassword"}).should match(/--password=dbpassword/)
     end
     it "should append the database name" do
-      QuickConnect.get_mysql_prompt({"database" => "dbname"}).should match(/dbname$/)
+      QuickConnect.get_mysql_connect_options({"database" => "dbname"}).should match(/dbname$/)
     end
   end
 end
